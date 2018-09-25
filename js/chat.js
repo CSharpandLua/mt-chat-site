@@ -1,13 +1,16 @@
- var config = {
+// Main config 
+var config = {
     apiKey: "AIzaSyDw5YEFrcJZfpHg-LOJvEb66QzlCiHLb6o",
     authDomain: "chat-app-dc9d8.firebaseapp.com",
     databaseURL: "https://chat-app-dc9d8.firebaseio.com",
     storageBucket: "chat-app-dc9d8.appspot.com",
 };
+
 firebase.initializeApp(config);
 
 var chatData = firebase.database().ref();
 
+// Push message to server
 function pushMessage(event) {
   if (event.keyCode == 13) {
     var name = $('#nameInput').val();
@@ -21,6 +24,7 @@ $('#messageInput').keypress(pushMessage);
 
 chatData.on("child_added", showMessage);
 
+// Show chat message
 function showMessage(msg) {
   var message = msg.val();
   var messageSender = message.name;
